@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Okienka po kliknięciu Spacji</title>
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #info {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .popup {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-color: #444;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.5s ease;
+    }
+
+    .popup:hover {
+      background-color: #666;
+    }
+
+    @keyframes floating {
+      0% {
+        transform: translateX(0) translateY(0);
+      }
+      50% {
+        transform: translateX(100px) translateY(100px);
+      }
+      100% {
+        transform: translateX(0) translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="info">Naciśnij Spację, aby otworzyć okienka!</div>
+
+  <script>
+    let popupCount = 0;
+    const totalPopups = 20;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    // Funkcja tworząca okienka
+    function createPopup() {
+      const popup = document.createElement('div');
+      popup.classList.add('popup');
+      popup.textContent = `Okno ${popupCount + 1}`;
+
+      // Losowanie pozycji okna
+      const x = Math.random() * (screenWidth - 150);
+      const y = Math.random() * (screenHeight - 150);
+      popup.style.left = `${x}px`;
+      popup.style.top = `${y}px`;
+
+      // Dodanie animacji
+      popup.style.animation = `floating ${Math.random() * 3 + 2}s infinite ease-in-out`;
+
+      // Zwiększamy licznik
+      popupCount++;
+
+      // Obsługa kliknięcia okna
+      popup.addEventListener('click', () => {
+        popup.style.backgroundColor = '#00FF00'; // Zmienia kolor na zielony po kliknięciu
+        setTimeout(() => popup.remove(), 500); // Usuwa okno po 0.5 sekundy
+      });
+
+      document.body.appendChild(popup);
+    }
+
+    // Słuchamy na naciśnięcie spacji
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && popupCount < totalPopups) {
+        createPopup();
+      }
+
+      // Jeśli wszystkie okna zostały stworzone, wyświetlamy komunikat
+      if (popupCount === totalPopups) {
+        document.getElementById('info').textContent = 'Wszystkie okna zostały utworzone!';
+      }
+    });
+  </script>
+
+</body>
+</html>
