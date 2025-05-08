@@ -3,15 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ptoszek Okienka</title>
+  <title>Ptoszek - Latające Okna</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
-      background-color: transparent;
+      background-color: black;
+      height: 100vh;
     }
   </style>
 </head>
 <body>
+
+<script>
+  let popupCount = 0;
+  const totalPopups = 20;
+
+  // Funkcja, która tworzy okno (pop-up)
+  function createPopup() {
+    if (popupCount < totalPopups) {
+      const x = Math.random() * (window.innerWidth - 300);
+      const y = Math.random() * (window.innerHeight - 200);
+      
+      const popup = window.open("", "", `width=300,height=200,left=${x},top=${y}`);
+      popup.document.write(`
+        <html>
+          <head>
+            <title>Okno</title>
+            <style>
+              body {
+                margin: 0;
+                background: transparent;
+                overflow: hidden;
+              }
+              .content {
+                color: white;
+                font-size: 24px;
+                text-align: center;
+                margin-top: 50%;
+                font-family: Arial, sans-serif;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="content">Mogły KC</div>
+          </body>
+        </html>
+      `);
+
+      // Animacja latania okna
+      const moveInterval = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(moveInterval);
+        } else {
+          const randomX = Math.random() * (window.innerWidth - 300);
+          const randomY = Math.random() * (window.innerHeight - 200);
+          popup.moveTo(randomX, randomY);
+        }
+      }, 50); // Okno porusza się co 50ms
+
+      popupCount++;
+    }
+  }
+
+  // Nasłuchujemy na naciśnięcie spacji
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      createPopup();
+    }
+  });
+</script>
+
 </body>
 </html>
