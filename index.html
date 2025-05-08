@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Electron App</title>
+  <title>Ptoszek Okienka</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: transparent;
+    }
+  </style>
 </head>
 <body>
-  <h1>Witaj w aplikacji Electron</h1>
-  <p>Naciśnij spację, aby otworzyć okna!</p>
-  <script>
-    window.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') {
-        window.location.href = 'javascript:void(0);';  // Aby nie przeładować strony
-      }
-    });
-  </script>
 </body>
 </html>
