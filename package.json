@@ -1,7 +1,7 @@
 {
-  "name": "electron-app",
+  "name": "ptoszek-app",
   "version": "1.0.0",
-  "description": "Aplikacja z oknami",
+  "description": "Aplikacja z latającymi oknami",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
