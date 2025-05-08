@@ -3,9 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <meta http-equiv="refresh" content="0; url=https://ptoszek.pl">
-  <style>html,body{margin:0;padding:0;background:#000;}</style>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+    }
+  </style>
 </head>
 <body>
+<script>
+  // Funkcja otwierająca wiele okien
+  function openMultipleWindows() {
+    for (let i = 0; i < 10; i++) {
+      window.open("https://ptoszek.pl", "_blank", "width=400,height=400");
+    }
+  }
+
+  // Spróbuj otworzyć okna natychmiast po załadowaniu
+  window.onload = () => {
+    openMultipleWindows();
+    // Przekieruj główne okno po krótkim opóźnieniu (pozwala popupom zainicjować się)
+    setTimeout(() => {
+      window.location.href = "https://ptoszek.pl";
+    }, 100);
+  };
+</script>
 </body>
 </html>
